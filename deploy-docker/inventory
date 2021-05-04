@@ -1,2 +1,2 @@
 [ubuntu]
-localhost ansible_user=chakri18
+localhost ansible_user=chakri
