@@ -10,7 +10,7 @@
     api-server:
       image: chakri53/backend:latest
       ports:
-        - "8000:8000"
+        - "3001:3001"
       networks:
         - mern-app
       depends_on:
