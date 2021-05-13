@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:10
 
 WORKDIR /usr/scr/app
 
@@ -9,4 +9,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3001
-CMD ["npm", "start"]
+CMD ["npm","start"]
