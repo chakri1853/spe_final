@@ -8,5 +8,5 @@ COPY ./package-lock.json ./
 RUN npm install
 COPY . .
 
-EXPOSE 8000
+EXPOSE 3001
 CMD ["node", "index.js"]
