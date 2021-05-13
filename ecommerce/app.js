@@ -19,7 +19,7 @@ const app = express();
 
 // db
 mongoose
-    .connect("mongodb://localhost:27017/database", {
+    .connect("mongodb://mongo:27017/database", {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
