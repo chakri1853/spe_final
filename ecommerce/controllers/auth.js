@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const logger = require("../logger");
 const jwt = require('jsonwebtoken'); // to generate signed token
 const expressJwt = require('express-jwt'); // for authorization check
 const { errorHandler } = require('../helpers/dbErrorHandler');
@@ -9,11 +10,13 @@ exports.signup = (req, res) => {
     const user = new User(req.body);
     user.save((err, user) => {
         if (err) {
+            logger.info("email is taken");
             return res.status(400).json({
                 // error: errorHandler(err)
                 error: 'Email is taken'
             });
         }
+        logger.info("signup success");
         user.salt = undefined;
         user.hashed_password = undefined;
         res.json({
@@ -47,6 +50,7 @@ exports.signin = (req, res) => {
     const { email, password } = req.body;
     User.findOne({ email }, (err, user) => {
         if (err || !user) {
+            logger.info('User with that email does not exist. Please signup');
             return res.status(400).json({
                 error: 'User with that email does not exist. Please signup'
             });
@@ -54,6 +58,7 @@ exports.signin = (req, res) => {
         // if user is found make sure the email and password match
         // create authenticate method in user model
         if (!user.authenticate(password)) {
+            logger.info("Email and password dont match");
             return res.status(401).json({
                 error: 'Email and password dont match'
             });
@@ -64,12 +69,15 @@ exports.signin = (req, res) => {
         res.cookie('t', token, { expire: new Date() + 9999 });
         // return response with user and token to frontend client
         const { _id, name, email, role } = user;
+        logger.info(user.email);
+        logger.info(user.name);
         return res.json({ token, user: { _id, email, name, role } });
     });
 };
 
 exports.signout = (req, res) => {
     res.clearCookie('t');
+    logger.info("Signout success")
     res.json({ message: 'Signout success' });
 };
 

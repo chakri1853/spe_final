@@ -1,13 +1,13 @@
 const app = require("../app");
-//const logger = require("../logger");
+const logger = require("../logger");
 const request = require("supertest");
 let token;
-const baseUrl = "http://localhost:3001/api/Signup";
+const baseUrl = "http://localhost:3001/api";
 // Signup;
-describe("\n\n\n\nSignup ::", () => {
+describe("\n\n\n\nsignup ::", () => {
     it("Failed to signup \n\n", (done) => {
         request(baseUrl)
-            .post("/")
+            .post("/signup")
             .send({
                 name: "hi8",
                 email: "chakri579@gmail.com",
@@ -19,9 +19,9 @@ describe("\n\n\n\nSignup ::", () => {
                     //logger.error(err);
                     //throw err;
                 }
-                console.log(req.body);
+                console.log(res.body);
                 if (res.body.name!=="hi8") {
-                    console.log("not valid");
+                    console.log("user name already exists");
                     logger.info(res.body);
                     token = res.body.token;
                 }
@@ -32,49 +32,53 @@ describe("\n\n\n\nSignup ::", () => {
 
 // Login
 
-// describe("\n\n\n\nLogin test :: ", () => {
-//   it("should not be able log in \n\n", (done) => {
-//     request(baseUrl)
-//       .post("/")
-//       .send({
-//         email: "rajiv075@gmail.com",
-//         password: "rajiv",
-//       })
-//       .end((err, res) => {
-//         console.log(res.body.success);
-//         if (res.body.msg == "Invalid Credentials") {
-//           logger.info(res.body.msg);
-//         } else {
-//           // console.log(res.body);
-//           // logger.info(res.body);
-//           console.log("logged in");
-//         }
-//         done();
-//       });
-//   });
+describe("\n\n\n\nLogin test :: ", () => {
+    it("should not be able log in \n\n", (done) => {
+        request(baseUrl)
+            .post("/signin")
+            .send({
+                email: "hey075@gmail.com",
+                password: "rv",
+            })
+            .end((err, res) => {
+                console.log(res.body);
+                if (res.body.error == "User with that email does not exist. Please signup") {
+                    logger.info(res.body.error);
+                    console.log(res.body.error);
+                    console.log("login failed");
+                } else {
+                    // console.log(res.body);
+                    // logger.info(res.body);
+                    console.log("logged in");
+                }
+                done();
+            });
+    });
 
-//   it("should be able to login \n\n", (done) => {
-//     request(baseUrl)
-//       .post("/")
-//       .send({
-//         email: "rajiv075@gmail.com",
-//         password: "rajiv075",
-//       })
-//       .end((err, res) => {
-//         // console.log(res.body);
-//         if (res.body.sucess === 0) {
-//           logger.error(err);
-//           throw err;
-//         }
-//         if (res.body) {
-//           // console.log(res.body);
-//           logger.info("User token :" + res.body.token);
-//           token = res.body.token;
-//         }
-//         done();
-//       });
-//   });
-// });
+    it("should be able to login \n\n", (done) => {
+        request(baseUrl)
+            .post("/signin")
+            .send({
+                email: "chakri@gmail.com",
+                password: "rrrrrr8",
+            })
+            .end((err, res) => {
+                // console.log(res.body);
+                //console.log(res.body);
+                if(res.body.user.name==="hi") {
+                    logger.info("User token :" + res.body.token);
+                    console.log("login success");
+                }
+                else {
+                    logger.info("login failed");
+                    console.log("login failed");
+                }
+                //logger.info("User token :" + res.body.token);
+                token = res.body.token;
+                done();
+            });
+    });
+});
 
 // Get all articles
 // describe("\n\n\n\nGet all articles :: ", () => {

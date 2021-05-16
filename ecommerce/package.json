@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "PORT=3001 node app.js",
-    "test": "mocha -- timeout 10000 -- exit"
+    "test": "mocha --timeout 10000 --exit"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,44 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "log/.85db1fd5f3263409fb63939cc049ec762040a72f-audit.json",
+    "files": [
+        {
+            "date": 1621093084180,
+            "name": "log/2021-05-15-21-results.log",
+            "hash": "6eb76d8dc32d450ebe9f58e4e55fe70e"
+        },
+        {
+            "date": 1621097528989,
+            "name": "log/2021-05-15-22-results.log",
+            "hash": "9eb79dd57fcfe764f865a7a16974a219"
+        },
+        {
+            "date": 1621103682362,
+            "name": "log/2021-05-16-00-results.log",
+            "hash": "649e17826ce7b8462bb778afec8c356f"
+        },
+        {
+            "date": 1621144132478,
+            "name": "log/2021-05-16-11-results.log",
+            "hash": "bea6ecf6ae550038dd4ec12680d24afb"
+        },
+        {
+            "date": 1621146600038,
+            "name": "log/2021-05-16-12-results.log",
+            "hash": "a1554ebff0b727e82f85d4bc8c723e41"
+        },
+        {
+            "date": 1621152823912,
+            "name": "log/2021-05-16-13-results.log",
+            "hash": "cbf133588453dd9916e3d8c3f74aa6b2"
+        },
+        {
+            "date": 1621153819338,
+            "name": "log/2021-05-16-14-results.log",
+            "hash": "be83d6689426a19d041c598d1a9ca4d0"
+        }
+    ]
+}

@@ -2,6 +2,7 @@ const formidable = require('formidable');
 const _ = require('lodash');
 const fs = require('fs');
 const Product = require('../models/product');
+const logger = require("../logger");
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.productById = (req, res, next, id) => {
@@ -9,6 +10,7 @@ exports.productById = (req, res, next, id) => {
         .populate('category')
         .exec((err, product) => {
             if (err || !product) {
+
                 return res.status(400).json({
                     error: 'Product not found'
                 });
@@ -35,7 +37,14 @@ exports.create = (req, res) => {
         // check for all fields
         const { name, description, price, category, quantity, shipping } = fields;
 
-        if (!name || !description || !price || !category || !quantity || !shipping) {
+        logger.info(name);
+        logger.info(description);
+        logger.info(price);
+        logger.info(category);
+        logger.info(quantity);
+        logger.info(shipping);
+        if (!name || !description || !price || !category || !quantity ) {
+            logger.info("all fields required");
             return res.status(400).json({
                 error: 'All fields are required'
             });
@@ -64,6 +73,7 @@ exports.create = (req, res) => {
                     error: errorHandler(err)
                 });
             }
+            logger.info("product saved successfully");
             res.json(result);
         });
     });
@@ -77,6 +87,7 @@ exports.remove = (req, res) => {
                 error: errorHandler(err)
             });
         }
+        logger.info("product deleted successfully");
         res.json({
             message: 'Product deleted successfully'
         });
@@ -116,6 +127,7 @@ exports.update = (req, res) => {
                     error: errorHandler(err)
                 });
             }
+            logger.info("updated successfully");
             res.json(result);
         });
     });
@@ -144,6 +156,7 @@ exports.list = (req, res) => {
                     error: 'Products not found'
                 });
             }
+            logger.info("product listed successfully");
             res.json(products);
         });
 };
@@ -165,6 +178,7 @@ exports.listRelated = (req, res) => {
                     error: 'Products not found'
                 });
             }
+            logger.info("products related listed successfully");
             res.json(products);
         });
 };
@@ -176,6 +190,7 @@ exports.listCategories = (req, res) => {
                 error: 'Categories not found'
             });
         }
+        logger.info("categories saved successfully");
         res.json(categories);
     });
 };
@@ -221,10 +236,12 @@ exports.listBySearch = (req, res) => {
         .limit(limit)
         .exec((err, data) => {
             if (err) {
+                logger.info("product not found");
                 return res.status(400).json({
                     error: 'Products not found'
                 });
             }
+            logger.info("product found successfully");
             res.json({
                 size: data.length,
                 data

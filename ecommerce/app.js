@@ -1,5 +1,4 @@
-const logger = require('./logger')
-
+const logger = require('./logger');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -21,7 +20,7 @@ const app = express();
 
 // db
 mongoose
-    .connect("mongodb://mongo:27017/database", {
+    .connect("mongodb://localhost:27017/database", {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
@@ -46,5 +45,6 @@ app.use('/api', orderRoutes);
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
+    logger.info(`Server is running on  the port ${port}`);
     console.log(`Server is running on  the port ${port}`);
 });
