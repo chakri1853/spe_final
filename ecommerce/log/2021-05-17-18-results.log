@@ -1,0 +1,8 @@
+2021-05-17 18:23:21[app.js] info: "Server is running on  the port 3001"
+2021-05-17 18:23:22[app.js] info: "email is taken"
+2021-05-17 18:23:22[app.js] info: {"error":"Email is taken"}
+2021-05-17 18:23:22[app.js] info: "User with that email does not exist. Please signup"
+2021-05-17 18:23:22[app.js] info: "User with that email does not exist. Please signup"
+2021-05-17 18:23:22[app.js] info: "chakri@gmail.com"
+2021-05-17 18:23:22[app.js] info: "hi"
+2021-05-17 18:23:22[app.js] info: "User token :eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDdmYWFhY2Y2YzdlNzg4M2FiOTAwYmIiLCJpYXQiOjE2MjEyNTYwMDJ9.Ycaoc5oBveQivrhR4tNCPa1ZBBSTzuorvUVLAy-Gap0"
